@@ -1,11 +1,255 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>eFLAB - Football Squad Builder</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>eFLAB - Football Squad Builder & Tactical Database</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #000000;
+            --card-bg: #0d0e12;
+            --accent-color: #00ff88;
+            --text-main: #ffffff;
+            --text-muted: #8e8e93;
+            --border-color: #1c1c1e;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Navbar */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 8%;
+            border-bottom: 1px solid var(--border-color);
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(12px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 1.6rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            color: var(--text-main);
+        }
+
+        .logo span {
+            color: var(--accent-color);
+        }
+
+        .cta-btn {
+            background: var(--accent-color);
+            color: #000;
+            padding: 10px 22px;
+            border-radius: 10px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 20px rgba(0, 255, 136, 0.4);
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 100px 8% 60px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(0, 255, 136, 0.1);
+            color: var(--accent-color);
+            border: 1px solid rgba(0, 255, 136, 0.3);
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 24px;
+        }
+
+        .hero h1 {
+            font-size: 3.4rem;
+            font-weight: 800;
+            line-height: 1.15;
+            letter-spacing: -1px;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            margin-bottom: 36px;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 80px 8%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title h2 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 24px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 18px;
+            padding: 32px;
+            transition: transform 0.2s ease, border-color 0.2s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(0, 255, 136, 0.4);
+        }
+
+        .card-icon {
+            width: 48px;
+            height: 48px;
+            background: rgba(0, 255, 136, 0.1);
+            color: var(--accent-color);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+        }
+
+        .card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 12px;
+            font-weight: 700;
+        }
+
+        .card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid var(--border-color);
+            padding: 40px 8%;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        footer a {
+            color: var(--text-muted);
+            text-decoration: none;
+            margin: 0 12px;
+            transition: color 0.2s ease;
+        }
+
+        footer a:hover {
+            color: var(--accent-color);
+        }
+
+        .footer-links {
+            margin-top: 16px;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.2rem; }
+            .hero p { font-size: 1rem; }
+            header { padding: 16px 5%; }
+            .features { padding: 60px 5%; }
+        }
+    </style>
 </head>
-<body style="font-family: system-ui, sans-serif; text-align: center; padding: 50px; background: #000; color: #fff;">
-    <h1>eFLAB: Football Squad Builder</h1>
-    <p>Official landing page and app support.</p>
+<body>
+
+    <header>
+        <div class="logo">e<span>FLAB</span></div>
+        <a href="#download" class="cta-btn">Get App</a>
+    </header>
+
+    <section class="hero">
+        <div class="hero-badge">⚽ Ultimate Football Companion</div>
+        <h1>Build, Analyze & Master Your Dream Squad</h1>
+        <p>The complete tactical calculator, player database, and card comparison tool engineered for eFootball squad builders.</p>
+        <a href="#download" class="cta-btn" id="download" style="display: inline-block; padding: 14px 36px; font-size: 1.1rem;">Download on App Store</a>
+    </section>
+
+    <section class="features">
+        <div class="section-title">
+            <h2>Engineered For Tactical Precision</h2>
+        </div>
+        <div class="grid">
+            <div class="card">
+                <div class="card-icon">⚡</div>
+                <h3>Tactical Squad Builder</h3>
+                <p>Design, fine-tune, and optimize custom 11-player formations with dynamic tactical adjustments.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">🔍</div>
+                <h3>Player Database</h3>
+                <p>Explore detailed player ratings, booster attributes, playstyles, and overall skill stats in seconds.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">⚖️</div>
+                <h3>Card Comparison</h3>
+                <p>Compare player stats directly to discover exact attribute differences and select the ideal roster fit.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">🧠</div>
+                <h3>AI Tactical Coach</h3>
+                <p>Get instant tactical advice, playstyle synergy, and team chemistry optimization built for champions.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 eFLAB. All rights reserved.</p>
+        <div class="footer-links">
+            <a href="/app-ads.txt">app-ads.txt</a>
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Service</a>
+        </div>
+    </footer>
+
 </body>
 </html>
